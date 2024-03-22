@@ -148,12 +148,14 @@ window.onload = function()
     // ZAZNACZ WIELE LEADOW I WYŚWIETL FORMULARZ
     $(document).on('click','.btn-add-task-to-many',function(e)
     {
-        
+        e.preventDefault();
+        var grupa_leadow = $(this).parents('.grupa-leadow');
+        grupa_leadow.find('input[data-klient-id]:checkbox').prop('checked', false);
 
-        
+        var ile_zaznaczyc = parseInt($(this).data('ile'));
+        grupa_leadow.find("input[data-klient-id]:lt(" + ile_zaznaczyc + ")").prop('checked', true);
 
-
-
+        wyswietl_formularz_dla_zaznaczonych($(this));
     });
     
 
@@ -170,7 +172,11 @@ window.onload = function()
     $(document).on('click','.btn-add-task-to-checked',function(e)
     {
         e.preventDefault();
-        var grupa_leadow = $(this).parents('.grupa-leadow');
+        wyswietl_formularz_dla_zaznaczonych($(this));
+    });
+
+    function wyswietl_formularz_dla_zaznaczonych(klikniety_button){
+        var grupa_leadow = klikniety_button.parents('.grupa-leadow');
         var zaznaczone = $('input[data-klient-id]:checked',grupa_leadow);
         var len = zaznaczone.length;
         if(len){
@@ -178,11 +184,9 @@ window.onload = function()
             $('#czarne-tlo-przydziel-zadanie-form input[name="grupa_leadow"]').val($(grupa_leadow).attr('id'));
         }
         else{
-            bootbox.alert('Zaznacz przynajmniej jednego leada.');
             return false;
         }
-    });
-
+    }
 
     $(document).on('submit','#przydziel-zadanie-form',function(e)
     {
@@ -280,7 +284,7 @@ function  pokaz_leady(){
                     ] 
                     ).node();
                     $(rowNode).attr('id','klient-'+v.klient_id+'-row');
-                    $('td:eq(4),td:eq(5)',rowNode).addClass( 'text-center');
+                    $('td:eq(4),td:eq(5),td:eq(6)',rowNode).addClass( 'text-center');
                 });
                 table.draw();
             }
