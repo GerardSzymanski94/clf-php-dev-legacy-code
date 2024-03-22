@@ -64,6 +64,7 @@ alert($alert); ?>
                         <th>Telefon</th>
                         <th>E-mail</th>
                         <th style="width: 60px;">Level</th>
+                        <th>Produkt</th>
                         <th style="width: 50px;">zaznacz</th>
                     </tr>
                 </thead>
@@ -92,6 +93,7 @@ alert($alert); ?>
                         <th>Telefon</th>
                         <th>E-mail</th>
                         <th style="width: 60px;">Level</th>
+                        <th>Produkt</th>
                         <th style="width: 50px;">zaznacz</th>
                     </tr>
                 </thead>
@@ -267,11 +269,13 @@ function  pokaz_leady(){
                     var d3 = ((d2.length === 10) && d2.indexOf("0")===0) ? d2.substr(1) : d2;
                     var d4 = (d3.length === 9 ) ? d3.replace(/^(\d{3})(\d{3})(\d{3})$/, '$1 $2 $3') : v.telefon;
                     var level = v.level === 'klient' ? '<span class="label label-primary">KLIENT</span>' : '<span class="label label-success">UCZESTNIK</span>';                
+                    var product_name = v.nazwa_produktu;
                     var rowNode = table.row.add( [
                         '<a href="/klientKarta&id='+v.klient_id+'" target="_blank">'+v.klient+'&nbsp;<small><span class="glyphicon glyphicon-new-window"></span></small></a>', 
                         d4,
                         v.email,
                         level,
+                        product_name,
                         '<input data-klient-id="'+v.klient_id+'" type="checkbox">'
                     ] 
                     ).node();
