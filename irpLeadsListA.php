@@ -184,6 +184,7 @@ window.onload = function()
             $('#czarne-tlo-przydziel-zadanie-form input[name="grupa_leadow"]').val($(grupa_leadow).attr('id'));
         }
         else{
+            bootbox.alert('Zaznacz przynajmniej jednego leada.');
             return false;
         }
     }
